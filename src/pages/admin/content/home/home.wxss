@@ -1,0 +1,62 @@
+.bounce {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #232323;
+  height: 100%;
+  font: normal bold 3rem "Product Sans", sans-serif;
+  white-space: nowrap;
+}
+.letter {
+  animation: bounce 0.75s cubic-bezier(0.05, 0, 0.2, 1) infinite alternate;
+  display: inline-block;
+  transform: translate3d(0, 0, 0);
+  margin-top: 0.5em;
+  text-shadow: rgba(0, 0, 0, 0.4) 0 0 0.07em;
+  font: normal 550 3rem 'Varela Round', sans-serif;
+}
+.letter:nth-child(1) {
+  animation-delay: 0s;
+}
+.letter:nth-child(2) {
+  animation-delay: 0.08333333s;
+}
+.letter:nth-child(3) {
+  animation-delay: 0.16666667s;
+}
+.letter:nth-child(4) {
+  animation-delay: 0.25s;
+}
+.letter:nth-child(5) {
+  animation-delay: 0.33333333s;
+}
+.letter:nth-child(6) {
+  animation-delay: 0.41666667s;
+}
+.letter:nth-child(7) {
+  animation-delay: 0.52666667s;
+}
+.letter:nth-child(8) {
+  animation-delay: 0.60666667s;
+}
+.letter:nth-child(9) {
+  animation-delay: 0.68666667s;
+}
+.letter:nth-child(10) {
+  animation-delay: 0.78666667s;
+}
+.letter:nth-child(11) {
+  animation-delay: 0.88666667s;
+}
+@keyframes bounce {
+  0% {
+    transform: translate3d(0, 0, 0);
+    text-shadow: rgba(0, 0, 0, 0.4) 0 0 0.07em;
+  }
+  100% {
+    transform: translate3d(0, -1em, 0);
+    text-shadow: rgba(0, 0, 0, 0.4) 0 1em 0.5em;
+  }
+}

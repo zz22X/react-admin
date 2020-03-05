@@ -1,0 +1,14 @@
+#admin {
+  height: 100vh;
+  color: #fff;
+}
+#admin .content {
+  margin: 20px 20px 0 20px;
+  background-color: #fff;
+  color: #000;
+}
+#admin .footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

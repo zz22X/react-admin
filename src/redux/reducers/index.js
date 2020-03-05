@@ -2,9 +2,11 @@
 
 //引入reducer
 import LoginReducer from './login_reducer'
+import AdminReducer from './admin_reducer'
 //引入combine
 import { combineReducers } from 'redux'
 
 export default combineReducers({
-  userInfo: LoginReducer
+  userInfo: LoginReducer,
+  cateList: AdminReducer
 })

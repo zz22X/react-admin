@@ -1,25 +1,23 @@
 import "./css/index.less"
-import Logo from "./images/logo.png"
+import Logo from "../../assets/images/logo.png"
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { saveUserInfo } from '../../redux/actions/login_action'
 import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { getLogin } from "../../api/login"
-import { Redirect } from 'react-router-dom'
+import CheckLogin from '../check_login/index'
 
-
+@connect(state => ({userInfo: state.userInfo}),
+{saveUserInfo})
+@CheckLogin
  class Login extends Component {
   state = ({
     username: "",
     password: ""
   })
   render() {
-    if(this.props.userInfo.isLogin) {
-      return <Redirect to="/admin" />
-    }
     const onFinish = values => {
-      console.log(values)
       this.setState({ 
         username: values.username,
         password: values.password
@@ -31,15 +29,12 @@ import { Redirect } from 'react-router-dom'
       getLogin(resData).then(res => {
         if(res.status === 0) {
           message.success('登录成功')
+          this.props.history.push("/admin")
           let data = res.data
           this.props.saveUserInfo(data)
-          setTimeout(() => this.props.history.push("/admin") ,1500)
-          console.log(res)
         }
       }).catch(err => console.log(err))
     };
-    console.log(this.props)
-    
     return (
       <div className="login_warp">
           <div className="header">
@@ -90,8 +85,8 @@ import { Redirect } from 'react-router-dom'
     )
   }
 }
-
-export default connect(
-  state => ({userInfo: state.userInfo}),
-  {saveUserInfo}
-)(Login)
+export default Login
+// export default connect(
+//   state => ({userInfo: state.userInfo}),
+//   {saveUserInfo}
+// )(Login)
