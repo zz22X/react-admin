@@ -45,13 +45,6 @@ export default [
     icon: 'icon-areachart',
     children: [
       {
-        title: '折现图',
-        key: 'line',
-        icon: 'icon-linechart',
-        path: '/admin/charts/line'
-
-      },
-      {
         title: '饼图',
         key: 'pie',
         icon: 'icon-piechart-circle-fil',

@@ -14,7 +14,6 @@ import Category from "./content/appstore/category/category"
 import Product from "./content/appstore/product/product"
 import AddUpdate from "./content/appstore/product/add_update"
 import Detail from "./content/appstore/product/detail"
-import Line from "./content/charts/line/line"
 import Pie from "./content/charts/pie/pie"
 
 import './css/index.less'
@@ -45,7 +44,6 @@ const { Footer, Sider, Content } = Layout;
                   <Route path="/admin/appstore/product/detail/:_id" component= { Detail } />
                   <Route path="/admin/role" component= { Role } />
                   <Route path="/admin/user" component= { User } />
-                  <Route path="/admin/charts/line" component= { Line } />
                   <Route path="/admin/charts/pie" component= { Pie } />
                   <Redirect to="/admin/home"/>
                 </Switch>
