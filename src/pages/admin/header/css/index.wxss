@@ -1,6 +1,9 @@
 #admin_header {
   color: black;
   background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 #admin_header .header_top {
   height: 40px;

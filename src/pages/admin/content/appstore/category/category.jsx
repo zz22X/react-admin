@@ -22,7 +22,6 @@ import { PAGE_SIZE } from "../../../../../config"
     this.formRef.current.resetFields();
     this.setState({
       visible: false,
-      addvisible: false
     });
   };
   //确认按钮的回调

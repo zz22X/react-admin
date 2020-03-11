@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 export default function (CheckLoginComponent) {
-  @connect( state => ({ isLogin: state.userInfo.isLogin }))
+@connect( state => ({ isLogin: state.userInfo.isLogin }))
   class CheckLogin extends Component {
     render() {
       const {...params} = this.props

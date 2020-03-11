@@ -2,15 +2,13 @@
 import {
   SAVE_USERINFO, DELETE_USERINFO
 } from '../action_types'
-import {
-  getToken
-} from '../../utils/app'
 //引入 action_type 
 let userinfo = JSON.parse(localStorage.getItem("admin_info"))
+let usertoken = JSON.parse(localStorage.getItem("admin_token"))
 let initState = {
   user: userinfo || {},
-  token: getToken() || '',
-  isLogin: userinfo && getToken()? true: false
+  token: usertoken || '',
+  isLogin: usertoken && userinfo? true: false
 }
 export default function (preState = initState, action) {
   const {
@@ -23,7 +21,7 @@ export default function (preState = initState, action) {
       newState = {
         user: data,
         token: data.token,
-        isLogin: initState.isLogin
+        isLogin: data? true:false
       }
       return newState;
     case DELETE_USERINFO:

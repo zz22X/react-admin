@@ -8,7 +8,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { getLogin } from "../../api/login"
 import CheckLogin from '../check_login/index'
 
-@connect(state => ({userInfo: state.userInfo}),
+@connect(state => ({userInfo: state.userInfo, isLogin: state.isLogin}),
 {saveUserInfo})
 @CheckLogin
  class Login extends Component {
@@ -27,11 +27,12 @@ import CheckLogin from '../check_login/index'
         password: values.password
       }
       getLogin(resData).then(res => {
-        if(res.status === 0) {
-          message.success('登录成功')
+        if(res.status === 0) {      
+          message.success('登录成功') 
           this.props.history.push("/admin")
-          let data = res.data
-          this.props.saveUserInfo(data)
+          this.props.saveUserInfo(res.data)
+          localStorage.setItem("admin_info", JSON.stringify(res.data))
+          localStorage.setItem("admin_token", JSON.stringify(res.data.token))
         }
       }).catch(err => console.log(err))
     };

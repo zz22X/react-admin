@@ -33,8 +33,9 @@ service.interceptors.response.use(
     if(error.response.status === 401) {
       message.error("身份验证失败。请重新登录")
       store.dispatch(deleteUserInfo())
+    }else {
+      message.error(error.message)
     }
-    message.error(error.message)
     return new Promise(() => {})
   }
 )

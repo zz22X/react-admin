@@ -7,12 +7,13 @@ import { Layout } from 'antd';
 import CheckLogin from '../check_login'
 import Header from './header'
 import Silder from './silder'
-
 import Home from "./content/home/home";
 import Role from "./content/role/role"
 import User from "./content/user/user"
 import Category from "./content/appstore/category/category"
 import Product from "./content/appstore/product/product"
+import AddUpdate from "./content/appstore/product/add_update"
+import Detail from "./content/appstore/product/detail"
 import Line from "./content/charts/line/line"
 import Pie from "./content/charts/pie/pie"
 
@@ -25,9 +26,7 @@ const { Footer, Sider, Content } = Layout;
 )
 @CheckLogin
  class Admin extends Component {
-  
   render() {
-    
     return (
       <BrowserRouter>
         <Layout id="admin">
@@ -39,10 +38,13 @@ const { Footer, Sider, Content } = Layout;
               <Content className="content">
                 <Switch>
                   <Route path="/admin/home" component= { Home } />
+                  <Route path="/admin/appstore/category" component= { Category } />
+                  <Route path="/admin/appstore/product" component= { Product } exact/>
+                  <Route path="/admin/appstore/product/add_update" component= { AddUpdate } exact />
+                  <Route path="/admin/appstore/product/add_update/:_id" component= { AddUpdate } />
+                  <Route path="/admin/appstore/product/detail/:_id" component= { Detail } />
                   <Route path="/admin/role" component= { Role } />
                   <Route path="/admin/user" component= { User } />
-                  <Route path="/admin/appstore/category" component= { Category } />
-                  <Route path="/admin/appstore/product" component= { Product } />
                   <Route path="/admin/charts/line" component= { Line } />
                   <Route path="/admin/charts/pie" component= { Pie } />
                   <Redirect to="/admin/home"/>

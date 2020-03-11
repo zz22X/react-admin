@@ -3,7 +3,6 @@ import screenfull from 'screenfull'
 import dayjs from 'dayjs'
 import { connect } from "react-redux"
 import { Modal, Button } from 'antd';
-import { withRouter } from 'react-router-dom'
 import { FullscreenOutlined, FullscreenExitOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { deleteUserInfo } from "../../../redux/actions/login_action"
 //import { getWeather } from "../../../api/common"
@@ -15,7 +14,7 @@ const { confirm } = Modal;
   state =>({ userInfo: state.userInfo.user }),
   { deleteUserInfo }
 )
-@withRouter
+
 class header extends Component {
   state = {
     isFull : false,
@@ -68,7 +67,10 @@ class header extends Component {
       okText: '确定',  
       onOk: () => {
         this.props.deleteUserInfo()
+        localStorage.removeItem("admin_info")
+        localStorage.removeItem("admin_token")
         sessionStorage.removeItem("SelectedTitle")
+        console.log(this.props)
       }
     });
   }

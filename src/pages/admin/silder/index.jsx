@@ -1,53 +1,68 @@
 import React, { Component } from 'react'
 import Logo from "../../../assets/images/logo.png"
-import store from '../../../redux/store'
+import { connect } from 'react-redux'
 import { Menu } from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
-import {Link} from 'react-router-dom'
-import { matchRole } from '../../../api/admin'
-import './css/index.less'
+import { Link, withRouter } from 'react-router-dom'
 import menu_list from '../../../config/menu_list'
+import './css/index.less'
 const { SubMenu } = Menu;
-export default class index extends Component {
+
+@connect(state => ({ usermenu: state.userInfo.user.rolemenu }))
+@withRouter
+class Silder extends Component {
   state = {
     rolemenu:[],
     currentSelected: sessionStorage.getItem("defaultSelected") || 'home',
     currentOpen: sessionStorage.getItem("defaultOpenKeys") || 'home',
   };
 
+
+
+  hasAuth = (menu) =>{
+    const {usermenu} = this.props
+    if(!menu.children) {
+      return usermenu.find(item => item === menu.key)
+    } else {
+      return menu.children.some((item2)=>usermenu.indexOf(item2.key) !== -1)
+    }
+    
+  }
+
   creatmenuList = (list) => {
-    return list.map(menu => {
-      const IconFont = createFromIconfontCN({
-        scriptUrl: '//at.alicdn.com/t/font_1671806_nxlomrzd66r.js',
-      });
-      if(!menu.children) {
-        return (
-          <Menu.Item key={menu.key}>
-             <Link to={menu.path}>
-             <IconFont type={menu.icon} />
-              <span>{menu.title}</span>
-             </Link>
-          </Menu.Item>
-        )
-      } else {
-        return (
-          <SubMenu
-            key={menu.key}
-            title={
-              <span>
-                <IconFont type={menu.icon} />
+    const IconFont = createFromIconfontCN({
+      scriptUrl: '//at.alicdn.com/t/font_1671806_nxlomrzd66r.js',
+    });
+    return list.map(menu => {  
+      if(this.hasAuth(menu)) {
+        if(!menu.children) { 
+          return (
+            <Menu.Item key={menu.key}>
+               <Link to={menu.path}>
+               <IconFont type={menu.icon} />
                 <span>{menu.title}</span>
-              </span>
-            }
-          >
-            {this.creatmenuList(menu.children)}
-          </SubMenu>
-        )
+               </Link>
+            </Menu.Item>
+          )
+        } else {
+          return (
+            <SubMenu
+              key={menu.key}
+              title={
+                <span>
+                  <IconFont type={menu.icon} />
+                  <span>{menu.title}</span>
+                </span>
+              }
+            >
+              {this.creatmenuList(menu.children)}
+            </SubMenu>
+          )
+        }
       }
     })
   }
   handleClick = (e) => {
-    console.log('handleClick调用了')
     let defaultSelected = e.key
     let defaultOpenKeys = e.keyPath[1] || e.keyPath[0]
     sessionStorage.setItem("defaultSelected", defaultSelected)
@@ -70,14 +85,6 @@ export default class index extends Component {
   }
 
   componentDidMount() {
-    let role_id = store.getState().userInfo.user.role_id
-    matchRole({_id: role_id}).then(res=> {
-      if(res.status === 0){
-        this.setState({
-          rolemenu: res.data.rolemenu
-        });
-      }
-    })
   }
   render() {
     return (
@@ -99,3 +106,4 @@ export default class index extends Component {
     )
   }
 }
+export default Silder

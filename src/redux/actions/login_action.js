@@ -2,22 +2,17 @@
 import {
   SAVE_USERINFO, DELETE_USERINFO
 } from "../action_types"
-import {
-  setToken, removeToken
-} from '../../utils/app'
 export const saveUserInfo = (value) => {
-  localStorage.setItem("admin_info", JSON.stringify(value))
-  setToken(value.token)
+  // localStorage.setItem("admin_info", JSON.stringify(value))
+  // localStorage.setItem("admin_token", JSON.stringify(value.token))
   return {
     type: SAVE_USERINFO,
-    data: value
+    data: value,
   }
 }
 export const deleteUserInfo = (value) => {
-  localStorage.removeItem("admin_info")
-  removeToken()
   return {
     type: DELETE_USERINFO,
-    data: ""
+    data: "",
   }
 }
