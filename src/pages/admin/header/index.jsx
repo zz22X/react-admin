@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { Modal, Button } from 'antd';
 import { FullscreenOutlined, FullscreenExitOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { deleteUserInfo } from "../../../redux/actions/login_action"
-//import { getWeather } from "../../../api/common"
+import { getWeather } from "../../../api/common"
 import './css/index.less'
 
 const { confirm } = Modal;
@@ -41,18 +41,18 @@ class header extends Component {
     },1000)
     
     
-    // getWeather().then(
-    //   res => {
-    //     this.setState({
-    //       weatherData: {
-    //         pic: res.dayPictureUrl,
-    //         weather: res.weather,
-    //         temperature: res.temperature
-    //       }
-    //     })
-    //   },
-    //   err => console.log(err)
-    // )
+    getWeather().then(
+      res => {
+        this.setState({
+          weatherData: {
+            pic: res.dayPictureUrl,
+            weather: res.weather,
+            temperature: res.temperature
+          }
+        })
+      },
+      err => console.log(err)
+    )
     
   }
   componentWillUnmount() {
